@@ -1,0 +1,24 @@
+package project.restaurant.objects;
+
+import java.util.List;
+import java.util.Map;
+
+public class Notes
+{
+  private Map<Integer, List<Item>> orders;
+
+  public Notes(Map<Integer, List<Item>> orders)
+  {
+    this.orders = orders;
+  }
+
+  public Map<Integer, List<Item>> getOrders()
+  {
+    return orders;
+  }
+
+  public Map<Integer, List<Item>> writeOrder(List<Item> orders){
+
+    return (Map<Integer, List<Item>>) orders;
+ }
+}

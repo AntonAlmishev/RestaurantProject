@@ -1,0 +1,124 @@
+package project.restaurant.objects;
+
+import java.util.Iterator;
+import java.util.List;
+import project.restaurant.models.Staff;
+
+public class Chef extends Staff
+{
+
+  private List<Chef> chefs;
+  private Storage    storage;
+  private Waiter     waiter;
+
+  public Chef(String firstName, String lastName, int salary)
+  {
+    super(firstName, lastName, salary);
+  }
+
+  public List<Chef> getChefs()
+  {
+    return chefs;
+  }
+
+  public void setChefs(List<Chef> chefs)
+  {
+    this.chefs = chefs;
+  }
+
+
+  private void gettingProducts(Storage storage)
+  {
+    Iterator<String> iterator = waiter
+        .getTakeOrders()
+        .iterator();
+    while (iterator.hasNext()) {
+      String currentOrder = iterator.next();
+      if (currentOrder.equalsIgnoreCase("Салата Капрезе")) {
+
+        storage.availableProducts.computeIfPresent("Домати", (k, v) -> v - 0.200);
+        storage.availableProducts.computeIfPresent("Моцарела", (k, v) -> v - 0.150);
+      }
+      else if (currentOrder.equalsIgnoreCase("Гръцка Салата")) {
+        storage.availableProducts.computeIfPresent("Домати", (k, v) -> v - 0.150);
+        storage.availableProducts.computeIfPresent("Краставици", (k, v) -> v - 0.150);
+        storage.availableProducts.computeIfPresent("Сирене", (k, v) -> v - 0.100);
+        storage.availableProducts.computeIfPresent("Маслини", (k, v) -> v - 0.50);
+      }
+      else if (currentOrder.equalsIgnoreCase("Салата Туна")) {
+        storage.availableProducts.computeIfPresent("Чери домати", (k, v) -> v - 0.150);
+        storage.availableProducts.computeIfPresent("Риба тон", (k, v) -> v - 0.100);
+        storage.availableProducts.computeIfPresent("Айсберг", (k, v) -> v - 0.150);
+        storage.availableProducts.computeIfPresent("Царевица", (k, v) -> v - 0.150);
+      }
+      else if (currentOrder.equalsIgnoreCase("Телешки стек със сос от манатарки")) {
+        storage.availableProducts.computeIfPresent("Телешко месо", (k, v) -> v - 0.400);
+        storage.availableProducts.computeIfPresent("Готварска сметана", (k, v) -> v - 0.50);
+        storage.availableProducts.computeIfPresent("Гъби", (k, v) -> v - 0.100);
+
+      }
+      else if (currentOrder.equalsIgnoreCase("Свинска вратна пържола с картофи по селски")) {
+        storage.availableProducts.computeIfPresent("Свинско месо", (k, v) -> v - 0.300);
+        storage.availableProducts.computeIfPresent("Картофи", (k, v) -> v - 0.250);
+      }
+      else if (currentOrder.equalsIgnoreCase("Свински сач със зеленчуци")) {
+        storage.availableProducts.computeIfPresent("Свинско месо", (k, v) -> v - 0.300);
+        storage.availableProducts.computeIfPresent("Червени пиперки", (k, v) -> v - 0.150);
+        storage.availableProducts.computeIfPresent("Моркови", (k, v) -> v - 0.100);
+        storage.availableProducts.computeIfPresent("Лук", (k, v) -> v - 0.100);
+        storage.availableProducts.computeIfPresent("Тиквички", (k, v) -> v - 0.200);
+      }
+      else if (currentOrder.equalsIgnoreCase("Пилешка кавърма")) {
+        storage.availableProducts.computeIfPresent("Пилешко месо", (k, v) -> v - 0.300);
+        storage.availableProducts.computeIfPresent("Червени пиперки", (k, v) -> v - 0.100);
+        storage.availableProducts.computeIfPresent("Моркови", (k, v) -> v - 0.75);
+        storage.availableProducts.computeIfPresent("Лук", (k, v) -> v - 0.75);
+      }
+      else if (currentOrder.equalsIgnoreCase("Пиле четери сирене")) {
+        storage.availableProducts.computeIfPresent("Пилешко месо", (k, v) -> v - 0.300);
+        storage.availableProducts.computeIfPresent("Готварска сметана", (k, v) -> v - 0.100);
+        storage.availableProducts.computeIfPresent("Колекция сирена", (k, v) -> v - 0.150);
+      }
+      else if (currentOrder.equalsIgnoreCase("Еклерова торта")) {
+        storage.availableProducts.computeIfPresent("Еклерова торта", (k, v) -> v - 0.250);
+      }
+      else if (currentOrder.equalsIgnoreCase("Шоколадово суфле")) {
+        storage.availableProducts.computeIfPresent("Шоколадово суфле", (k, v) -> v - 0.250);
+      }
+      else if (currentOrder.equalsIgnoreCase("Бяло вино - Еленово Шардоне")) {
+        storage.availableProducts.computeIfPresent("Бяло вино - Еленово Шардоне",
+            (k, v) -> v - 0.300);
+      }
+      else if (currentOrder.equalsIgnoreCase("Червено вино - Еленово Каберне Совиньон")) {
+        storage.availableProducts.computeIfPresent("Червено вино - Еленово Каберне Совиньон",
+            (k, v) -> v - 0.300);
+      }
+      else if (currentOrder.equalsIgnoreCase("Росиди Розе де Пино")) {
+        storage.availableProducts.computeIfPresent("Росиди Розе де Пино", (k, v) -> v - 0.300);
+      }
+      else if (currentOrder.equalsIgnoreCase("Уиски Glenfiddich")) {
+        storage.availableProducts.computeIfPresent("Уиски Glenfiddich", (k, v) -> v - 0.250);
+      }
+      else if (currentOrder.equalsIgnoreCase("Уиски Jameson")) {
+        storage.availableProducts.computeIfPresent("Уиски Jameson", (k, v) -> v - 0.250);
+      }
+      else if (currentOrder.equalsIgnoreCase("Бира Heineken")) {
+        storage.availableProducts.computeIfPresent("Бира Heineken", (k, v) -> v - 0.5);
+      }
+      else if (currentOrder.equalsIgnoreCase("Бира  Starobrno")) {
+        storage.availableProducts.computeIfPresent("Бира  Starobrno", (k, v) -> v - 0.5);
+      }
+      else if (currentOrder.equalsIgnoreCase("Кока Кола")) {
+        storage.availableProducts.computeIfPresent("Кока Кола", (k, v) -> v - 0.250);
+      }
+      else if (currentOrder.equalsIgnoreCase("Студем чай")) {
+        storage.availableProducts.computeIfPresent("Студем чай", (k, v) -> v - 0.500);
+      }
+      else if (currentOrder.equalsIgnoreCase("Минерална вода")) {
+        storage.availableProducts.computeIfPresent("Минерална вода", (k, v) -> v - 0.500);
+      }
+    }
+  }
+}
+
+

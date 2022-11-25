@@ -1,0 +1,51 @@
+package project.restaurant.objects;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import project.restaurant.interfaces.GenerateMethods;
+
+
+/**
+ * The client can make orders randomly and decide if they want to tip or not
+ */
+public class Client {
+  private BigDecimal wallet;
+  private List<Item> order;
+
+
+  public Client(BigDecimal wallet) {
+    this.wallet = wallet;
+  }
+  public List<Item> getOrder()
+  {
+    return order;
+  }
+  public void setOrder(List<Item> order)
+  {
+    this.order = order;
+  }
+
+  public BigDecimal getWallet() {
+    return wallet;
+  }
+
+  public void setWallet(BigDecimal wallet) {
+    this.wallet = wallet;
+  }
+
+  public void makeOrder(Menu menu){
+    List<Item> orders = new ArrayList<>();
+    orders.add(menu.getSalads().get(GenerateMethods.generateRandomNumber(0, menu.getSalads().size() - 1)));
+    orders.add(menu.getMainDishes().get(GenerateMethods.generateRandomNumber(0, menu.getMainDishes().size() - 1)));
+    orders.add(menu.getDrinks().get(GenerateMethods.generateRandomNumber(0, menu.getDrinks().size() - 1)));
+    orders.add(menu.getDesserts().get(GenerateMethods.generateRandomNumber(0, menu.getDesserts().size() - 1)));
+    setOrder(orders);
+  }
+  public BigDecimal payBill(){
+
+    return BigDecimal.valueOf(0.0);
+  }
+
+}
+

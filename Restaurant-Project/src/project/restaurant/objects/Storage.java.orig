@@ -1,0 +1,31 @@
+package project.restaurant.objects;
+
+import java.util.Map;
+
+public class Storage
+{
+  private  boolean productAvailable(Map<String, Double> availableProducts){
+
+
+  }
+
+
+  protected Map<String, Double> availableProducts;
+
+  public Storage(Map<String, Double> availableProducts)
+  {
+    this.availableProducts = availableProducts;
+  }
+
+  public Map<String, Double> getAvailableProducts()
+  {
+    return availableProducts;
+  }
+
+  public void setAvailableProducts(Map<String, Double> availableProducts)
+  {
+    this.availableProducts = availableProducts;
+  }
+
+
+}

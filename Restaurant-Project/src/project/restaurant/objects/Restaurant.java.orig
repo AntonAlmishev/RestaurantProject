@@ -1,0 +1,196 @@
+package project.restaurant.objects;
+
+import static project.restaurant.interfaces.GenerateMethods.generateTables;
+
+import java.math.BigDecimal;
+import java.util.*;
+
+import project.restaurant.interfaces.ColorAble;
+import project.restaurant.interfaces.GenerateMethods;
+
+public class Restaurant implements ColorAble {
+  /*
+  This class implements our restaurant.
+  it includes his name, revenue, free tables and turnover which we will calculate later
+   */
+
+  private String restaurantName;
+  private Waiter orderedProductsNames;
+  private BigDecimal revenue;
+  private BigDecimal turnover;
+  private List<Waiter> waiters;
+  private List<Chef> chefs;
+  private int restaurantTableCapacity;
+  private Storage storage;
+  private Menu menu;
+  private List<Table> tables;
+  private boolean restaurantIsFull;
+
+
+  public Restaurant(String restaurantName, BigDecimal revenue, BigDecimal turnover,
+                    int restaurantCpacity) {
+    this.restaurantName = restaurantName;
+    this.revenue = revenue;
+    this.turnover = turnover;
+    this.restaurantTableCapacity = restaurantCpacity;
+    this.restaurantIsFull = false;
+    tables = new ArrayList<>();
+    waiters = new ArrayList<>();
+  }
+
+  public void setWaiters(List<Waiter> waiters) {
+    this.waiters = waiters;
+  }
+
+  public boolean isRestaurantIsFull() {
+    return restaurantIsFull;
+  }
+
+
+
+  public void setRestaurantIsFull(boolean restaurantIsFull) {
+    this.restaurantIsFull = restaurantIsFull;
+  }
+
+  public List<Chef> getChefs() {
+    return chefs;
+  }
+
+  public void setChefs(List<Chef> chefs) {
+    this.chefs = chefs;
+  }
+
+  public String getRestaurantName() {
+    return restaurantName;
+  }
+
+  public void setRestaurantName(String restaurantName) {
+    this.restaurantName = restaurantName;
+  }
+
+  public BigDecimal getRevenue() {
+    return revenue;
+  }
+
+  public void setRevenue(BigDecimal revenue) {
+    this.revenue = revenue;
+  }
+
+  public BigDecimal getTurnover() {
+    return turnover;
+  }
+
+  public void setTurnover(BigDecimal turnover) {
+    this.turnover = turnover;
+  }
+
+  public int getRestaurantCpacity() {
+    return restaurantTableCapacity;
+  }
+
+  public void setRestaurantCpacity(int restaurantCpacity) {
+    this.restaurantTableCapacity = restaurantCpacity;
+  }
+
+  public Storage getStorage() {
+    return storage;
+  }
+
+  public void setStorage(Storage storage) {
+    this.storage = storage;
+  }
+
+  public Menu getMenu() {
+    return menu;
+  }
+
+  public void setTables(List<Table> tables) {
+    this.tables = tables;
+  }
+
+  public List<Table> getTables() {
+    return tables;
+  }
+
+  public void setMenu(Menu menu) {
+    this.menu = menu;
+  }
+
+  public void open() {
+    setStorage(GenerateMethods.generateStorage());
+    setMenu(GenerateMethods.generateMenu());
+    setTables(generateTables(restaurantTableCapacity));
+    setWaiters(generateWaiters());
+  }
+
+  public List<Waiter> getWaiters() {
+    return waiters;
+  }
+
+  public void close() {
+
+
+
+  }
+
+  public List<Waiter> generateWaiters() {
+    List<Waiter> waiterList = new ArrayList<>();
+
+    waiterList.add(new Waiter("Марянка", "Неделкова", 50, new BigDecimal(0),
+            new BigDecimal(40),
+            new BigDecimal(0)));
+
+    waiterList.add(new Waiter("Ивана", "Тошева", 50, new BigDecimal(0), new BigDecimal(40),
+            new BigDecimal(0)));
+
+    waiterList.add(new Waiter("Ивана", "Джешкович", 50, new BigDecimal(0), new BigDecimal(40),
+            new BigDecimal(0)));
+
+    return waiterList;
+  }
+
+  public void generateChefs() {
+
+    chefs.add(new Chef("Иван", "Георгиев", 90));
+
+    chefs.add(new Chef("Мария", "Петрова", 90));
+
+    chefs.add(new Chef("Георги", "Георгиев", 90));
+
+    chefs.add(new Chef("Ивана", "Тихомирова", 90));
+
+  }
+
+  public Map<String, Integer> soldStuff(List<String> salads) {
+
+    Map<String, Integer> products = new TreeMap<>();
+
+    for (String salad : salads) {
+      if (products.containsKey(salad)) {
+        products.put(salad, products.get(salad) + 1);
+      } else {
+        products.put(salad, 1);
+      }
+    }
+    return products;
+  }
+
+  public void selectionsTheElements(){
+    Menu m = new Menu();
+    Map<String, Integer> allProducts = soldStuff(orderedProductsNames.getAll());
+
+    System.out.println(ANSI_RED+"Днес бяха поръчани: "+ANSI_RESET);
+
+    allProducts.entrySet().stream()
+            .sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()))
+            .forEach(k -> System.out.println(k.getKey() + ": " + k.getValue()));
+
+    String keyMin = Collections.min(allProducts.entrySet(), Map.Entry.comparingByValue()).getKey();
+    System.out.println(ANSI_CYAN+ "Най-слабо продавания продукт е :" + keyMin + ANSI_RESET);
+    String keyMax = Collections.max(allProducts.entrySet(), Map.Entry.comparingByValue()).getKey();
+    System.out.println(ANSI_CYAN + "Най-добре продавания продуккт е " + keyMax + ANSI_RESET);
+
+    m.deleteFromTheMenu(keyMin);
+  }
+
+}

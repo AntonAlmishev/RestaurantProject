@@ -1,0 +1,130 @@
+package project.restaurant.objects;
+
+import project.restaurant.interfaces.ColorAble;
+
+import java.util.List;
+
+public class Menu implements ColorAble
+{
+
+  private List<Item> salads;
+  private List<Item> mainDishes;
+  private List<Item> desserts;
+  private List<Item> drinks;
+
+  public Menu(List<Item> salads, List<Item> mainDishes, List<Item> desserts, List<Item> drinks)
+  {
+    this.salads = salads;
+    this.mainDishes = mainDishes;
+    this.desserts = desserts;
+    this.drinks = drinks;
+  }
+
+  public Menu(){
+  }
+
+  public List<Item> getSalads()
+  {
+    return salads;
+  }
+
+  public void setSalads(List<Item> salads)
+  {
+    this.salads = salads;
+  }
+
+  public List<Item> getMainDishes()
+  {
+    return mainDishes;
+  }
+
+  public void setMainDishes(List<Item> mainDishes)
+  {
+    this.mainDishes = mainDishes;
+  }
+
+  public List<Item> getDrinks()
+  {
+    return drinks;
+  }
+
+  public void setDrinks(List<Item> drinks)
+  {
+    this.drinks = drinks;
+  }
+
+  public List<Item> getDesserts()
+  {
+    return desserts;
+  }
+
+  public void setDesserts(List<Item> desserts)
+  {
+    this.desserts = desserts;
+  }
+
+    public void deleteFromTheMenu(String keyMin){
+    Menu newMenu = new Menu();
+      for (int i = 0; i < getSalads().size() ; i++) {
+
+        if(newMenu.salads.get(i).getProductName().equals(keyMin)){
+          newMenu.salads.remove(getSalads().get(i));
+        }
+      }
+      for (int i = 0; i < getMainDishes().size() ; i++) {
+        newMenu.mainDishes.remove(getMainDishes().get(i));
+
+      }
+      for (int i = 0; i < getDesserts().size() ; i++) {
+          newMenu.mainDishes.remove(getDesserts().get(i));
+      }
+      for (int i = 0; i < getDrinks().size() ; i++) {
+           newMenu.drinks.remove(getDrinks().get(i));
+
+      }
+      System.out.println(newMenu);
+
+    }
+
+  public String getAllDrinks() {
+    String dMenu = "";
+    dMenu += ANSI_GREEN+"Напитки:\n";
+    for (int i = 0; i < drinks.size(); i++) {
+      Item d = drinks.get(i);
+      dMenu +=  (i + 1) + ". " + d.toString() + "\n"+ANSI_RESET;
+    }
+    return dMenu;
+  }
+
+  public String getAllDeserts() {
+    String nMenu = "";
+    nMenu += ANSI_YELLOW+ "Десерти:\n";
+    for (int i = 0; i <desserts.size(); i++) {
+      Item n = desserts.get(i);
+      nMenu +=   (i + 1) + ". " + n.toString() + "\n"+ANSI_RESET;
+    }
+    return nMenu;
+  }
+
+  public String getAllSalads() {
+    String aMenu = "";
+    aMenu += ANSI_RED+"Салати:\n";
+    for (int i = 0; i < salads.size(); i++) {
+      Item a = salads.get(i);
+      aMenu +=   (i + 1) + ". " + a.toString() + "\n"+ANSI_RESET;
+
+    }
+    return aMenu;
+  }
+
+  public String getAllMainDishes() {
+    String mMenu = "";
+    mMenu +=ANSI_BLUE+ "Основни ястия:\n";
+    for (int i = 0; i < mainDishes.size(); i++) {
+      Item m = mainDishes.get(i);
+      mMenu +=   (i + 1) + ". " + m.toString() + "\n"+ANSI_RESET;
+
+    }
+    return mMenu;
+  }
+}

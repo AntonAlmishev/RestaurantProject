@@ -1,0 +1,148 @@
+
+
+import static project.restaurant.interfaces.GenerateMethods.generateClients;
+import static project.restaurant.interfaces.GenerateMethods.generateRandomNumber;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import project.restaurant.objects.Client;
+import project.restaurant.objects.Restaurant;
+import project.restaurant.objects.Table;
+
+
+public class Main {
+
+  static Restaurant restaurant = new Restaurant("Bononia Estate", new BigDecimal(420),
+      new BigDecimal(0), 2);
+
+  public static void main(String[] args) {
+    startNewDay();
+
+  }
+
+  private static void startNewDay() {
+
+//    staffGetOnWork();
+    restaurant.open();
+    restaurant.close();
+    List<Client> clientsForTheDay;
+    clientsForTheDay = generateClients();
+    work(restaurant, clientsForTheDay);
+
+  }
+
+  private static void work(Restaurant restaurant,
+      List<Client> clientsForTheDay) {
+    Iterator<Client> clientIterator = clientsForTheDay.iterator();
+    List<Table> tableList = new ArrayList<>();
+    while (clientIterator.hasNext()) {
+      if (restaurant.isRestaurantIsFull()) {
+        System.out.println(
+            "The restaurant is full, if you'd like, you could wait for a table to get free.");
+        restaurant.setRestaurantIsFull(false);
+        int randomTable = generateRandomNumber(0, tableList.size());
+        tableList.get(randomTable).setTableIsFree(true);
+      }
+      for (Table table : restaurant.getTables()) {
+        if (!table.isTableIsFree()) {
+          continue;
+        }
+        int clientsForTheTable = generateRandomNumber(2, 5);
+        List<Client> clientGroup = new ArrayList<>();
+        for (int j = 0; j < clientsForTheTable; j++) {
+          clientGroup.add(clientIterator.next());
+        }
+        table.setTableIsFree(false);
+        table.setClientsOnTable(clientGroup);
+        tableList.add(table);
+        restaurant.setTables(tableList);
+
+        if (!table.isTableIsFree()) {
+          for (Client client : table.getClientsOnTable()) {
+            client.makeOrder(restaurant.getMenu());
+          }
+        }
+
+        if (table.getTableNumber() <= 5) {
+          restaurant
+              .getWaiters()
+              .get(0)
+              .getOrder(clientGroup, table);
+          for (Client client : clientGroup) {
+            client.payBill(restaurant.getWaiters().get(0));
+          }
+        } else if (table.getTableNumber() > 5 && table.getTableNumber() <= 10) {
+          restaurant
+              .getWaiters()
+              .get(1)
+              .getOrder(clientGroup, table);
+          for (Client client : clientGroup) {
+            client.payBill(restaurant.getWaiters().get(1));
+          }
+        } else if (table.getTableNumber() > 10 && table.getTableNumber() <= 15) {
+          restaurant
+              .getWaiters()
+              .get(2)
+              .getOrder(clientGroup, table);
+          for (Client client : clientGroup) {
+            client.payBill(restaurant.getWaiters().get(2));
+          }
+        }
+
+      }
+      restaurant.setRestaurantIsFull(true);
+    }
+
+  }
+}
+
+
+
+//table number< clients 1)queue list(if!tableavalibele "Please wait for ava table" - > client -> queue - >
+//Thread.wait(milis) - > que - > table
+
+//  private static void staffGetOnWork()
+//  {
+//
+//  }
+
+//  private static void work(Restaurant restaurant, Waiter waiter, Hostess hostess, Client client, Table table)
+//  {
+//    Iterator<Client> clientIterator = client
+//        .getClients()
+//        .listIterator();
+//    while (clientIterator.hasNext()) {
+//
+//      for (int i = 0; i < restaurant.getRestaurantCpacity(); i++) {
+//        List<Client> clientsToService = new ArrayList<>();
+//        for (int j = 0; j < table.getTableCapacity(); j++) {
+//          clientsToService.add(clientIterator.next());
+//        }
+//        table = new Table(i);
+//        hostess.clientAccommodation(clientsToService, table);
+//        waiter.getOrdersFromTable(table);
+//      }
+//
+//    }
+//  }
+
+//  {
+//
+//
+//    }
+
+//    for (int i = 0; i < restaurant.getRestaurantTablesCapacity(); i++) {
+//
+//      List<Client> newClients = new ArrayList<>();
+//
+//      for (int j = 0; j < restaurant.getTable().getTableCapacity(); j++) {
+//        newClients.add(clientIterator.next());
+//      }
+//
+//      hostess.directTheClientsToTheTable(newClients);
+//    }
+
+
+

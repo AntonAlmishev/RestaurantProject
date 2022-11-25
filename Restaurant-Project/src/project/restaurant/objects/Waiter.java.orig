@@ -1,0 +1,124 @@
+package project.restaurant.objects;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import project.restaurant.models.Staff;
+
+public class Waiter extends Staff
+{
+
+  private BigDecimal   tips;
+  private BigDecimal   turnoverWallet;
+  private BigDecimal   revenue;
+  private List<String> takeOrders;
+
+  public List<String> all;
+
+
+  public Waiter()
+  {
+  }
+
+  public Waiter(String firstName, String lastName, int salary,
+      BigDecimal turnoverWallet, BigDecimal revenue, BigDecimal tips)
+  {
+    super(firstName, lastName, salary);
+    this.turnoverWallet = turnoverWallet;
+    this.revenue = revenue;
+    this.tips = tips;
+    all = new ArrayList<>();
+
+  }
+
+  public List<String> getAll() {
+    return all;
+  }
+
+  public void setAll(List<String> all) {
+    this.all = all;
+  }
+
+  public BigDecimal getTurnoverWallet()
+  {
+    return turnoverWallet;
+  }
+
+  public void setTurnoverWallet(BigDecimal turnoverWallet)
+  {
+    this.turnoverWallet = turnoverWallet;
+  }
+
+  public BigDecimal getRevenue()
+  {
+    return revenue;
+  }
+
+  public void setRevenue(BigDecimal revenue)
+  {
+    this.revenue = revenue;
+  }
+
+  public List<String> getTakeOrders()
+  {
+    return takeOrders;
+  }
+
+  public void setTakeOrders(List<String> takeOrders)
+  {
+    this.takeOrders = takeOrders;
+  }
+
+  public void getOrder(List<Client> clientsOnTable, Table table)
+  {
+
+    List<String> ordersSFromTable = new ArrayList<>();
+
+    for (int i = 0; i < clientsOnTable.size(); i++) {
+      BigDecimal totalBill = new BigDecimal(0);
+
+      for (int j = 0; j < clientsOnTable
+          .get(i)
+          .getOrder()
+          .size(); j++) {
+        ordersSFromTable.add(clientsOnTable
+            .get(i)
+            .getOrder()
+            .get(j)
+            .getProductName());
+
+        all.add(clientsOnTable
+                .get(i)
+                .getOrder()
+                .get(j)
+                .getProductName());
+        totalBill = totalBill.add(new BigDecimal(String.valueOf(clientsOnTable
+            .get(i)
+            .getOrder()
+            .get(j)
+            .getProductPrice())));
+      }
+      clientsOnTable
+          .get(i)
+          .setBill(totalBill);
+      this.turnoverWallet = turnoverWallet.add(totalBill);
+    }
+
+    setAll(all);
+    setTakeOrders(ordersSFromTable);
+  }
+
+
+  public BigDecimal getTips()
+  {
+    return tips;
+  }
+
+  public void setTips(BigDecimal tips)
+  {
+    this.tips = tips;
+  }
+
+
+}
+

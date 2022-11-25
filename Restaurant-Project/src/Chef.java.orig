@@ -1,0 +1,128 @@
+import java.util.Map;
+
+public class Chef extends Storage{
+    Map<String,Double> recipes;
+    private String order;
+
+
+    public Chef(Map<String, Double> availableProducts, String order) {
+        super(availableProducts);
+        this.order = order;
+    }
+
+    public Map<String, Double> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Map<String, Double> recipes) {
+        this.recipes = recipes;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    private void takingProducts(String order){
+
+        if(order.equals("Капрезе")){
+        availableProducts.computeIfPresent("Домати",(k,v) -> v - 0.2200);
+        availableProducts.computeIfPresent("Сирене",(k,v) -> v - 0.150);
+        }
+
+        if(order.equals("Пиле четери сирене")){
+        availableProducts.computeIfPresent("Пилешко месо",(k,v) -> v - 300);
+        availableProducts.computeIfPresent("Сирене",(k,v) -> v - 250);
+        }
+        if(order.equals("Шоколадово суфле")){
+        availableProducts.computeIfPresent("Шоколадово суфле",(k,v) -> v - 250);
+        }
+        if(order.equals("Минерална вода")){
+        availableProducts.computeIfPresent("Минерална вода",(k,v) -> v - 300);
+        }
+        if(order.equals("Бира Heineken")){
+        availableProducts.computeIfPresent("Бира Heineken",(k,v) -> v - 0.5);
+        }
+        if(order.equals("Бира  Starobrno")){
+        availableProducts.computeIfPresent("Бира  Starobrno",(k,v) -> v - 0.5);
+        }
+        if(order.equals("Кока Кола")){
+        availableProducts.computeIfPresent("Кока Кола",(k,v) -> v - 0.35);
+        }
+        if(order.equals("Студем чай")){
+        availableProducts.computeIfPresent("Студем чай",(k,v) -> v - 0.35);
+        }
+        if(order.equals("Уиски Jameson")){
+        availableProducts.computeIfPresent("Уиски Jameson",(k,v) -> v - 0.1);
+        }
+        if(order.equals("Уиски Glenfiddich")){
+        availableProducts.computeIfPresent("Уиски Glenfiddich",(k,v) -> v - 0.1);
+        }
+        if(order.equals("Росиди Розе де Пино")){
+        availableProducts.computeIfPresent("Росиди Розе де Пино",(k,v) -> v - 0.3);
+        }
+        if(order.equals("Червено вино - Еленово Каберне Совиньон")){
+        availableProducts.computeIfPresent("Червено вино - Еленово Каберне Совиньон",(k,v) -> v - 0.3);
+        }
+        if(order.equals("Бяло вино - Еленово Шардоне")){
+        availableProducts.computeIfPresent("Бяло вино - Еленово Шардоне",(k,v) -> v - 0.3);
+        }
+        if(order.equals("Еклерова торта")){
+        availableProducts.computeIfPresent("Еклерова торта",(k,v) -> v - 0.250);
+        }
+        if(order.equals("Пилешка кавърма")){
+        availableProducts.computeIfPresent("Пилешко месо",(k,v) -> v - 0.2);
+        availableProducts.computeIfPresent("Пилешко месо",(k,v) -> v - 0.2);
+        }
+        if(order.equals("Свински сач със зеленчуци")){
+        availableProducts.computeIfPresent("Свинско месо",(k,v) -> v - 0.2);
+        availableProducts.computeIfPresent("Лук",(k,v) -> v - 0.05);
+        availableProducts.computeIfPresent("Червен лук",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Маслини",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Готварска сметана",(k,v) -> v - 0.2);
+        availableProducts.computeIfPresent("Чери домати",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Царевица",(k,v) -> v - 0.1);
+        }
+        if(order.equals("Свинска вратна пържола с картофи по селски")){
+        availableProducts.computeIfPresent("Свинско месо",(k,v) -> v - 0.2);
+        availableProducts.computeIfPresent("Картофи",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Червени пиперки",(k,v) -> v - 0.05);
+        availableProducts.computeIfPresent("Гъби",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Моркови",(k,v) -> v - 0.1);
+        }
+        if(order.equals("Телешки стек със сос от манатарки")){
+        availableProducts.computeIfPresent("Телешко месо",(k,v) -> v - 0.2);
+        availableProducts.computeIfPresent("Гъби",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Тиквички",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Колекция сирена",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Готварска сметана",(k,v) -> v - 0.05);
+        }
+        if(order.equals("Салата туна")){
+        availableProducts.computeIfPresent("Риба тон",(k,v) -> v - 0.2);
+        availableProducts.computeIfPresent("Царевица",(k,v) -> v - 0.05);
+        availableProducts.computeIfPresent("Маслини",(k,v) -> v - 0.05);
+        availableProducts.computeIfPresent("Айсберг",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Колекция сирена",(k,v) -> v - 0.05);
+        }
+        if(order.equals("Гръцка салата")){
+        availableProducts.computeIfPresent("Краставици",(k,v) -> v - 0.2);
+        availableProducts.computeIfPresent("Домати",(k,v) -> v - 0.1);
+        availableProducts.computeIfPresent("Маслини",(k,v) -> v - 0.05);
+        availableProducts.computeIfPresent("Тиквички",(k,v) -> v - 0.05);
+        availableProducts.computeIfPresent("Моркови",(k,v) -> v - 0.05);
+        }
+
+    }
+
+    public void cooking(String order){
+
+          if(haveAvailableProductsForRecipie(recipes)){
+              takingProducts(order);
+
+          }
+        }
+    }
+
